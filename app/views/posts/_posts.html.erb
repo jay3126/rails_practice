@@ -17,8 +17,7 @@
 				<td><%= post.description %></td>
 				<td><%=l post.created_at %></td>
 				<td>
-					<%= link_to t('.edit', :default => t("helpers.links.edit")),
-											edit_post_path(post), :class => 'btn btn-default btn-xs' %>
+					<button type="button" class="btn btn-default btn-xs" id="editPostBtn" onClick="openForm('edit', '<%= post.id %>');"><%= t('.edit', :default => t("helpers.links.edit")) %></button>
 					<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
 											post_path(post),
 											:method => :delete,
@@ -30,4 +29,4 @@
 	</tbody>
 </table>
 
-<button type="button" class="btn btn-info btn-lg" id="newPostBtn" onClick="openForm('new');"><%= t('.new', :default => t("helpers.links.new")) %></button>
+<button type="button" class="btn btn-info btn-lg" id="newPostBtn" onClick="openForm('new', 'nil');"><%= t('.new', :default => t("helpers.links.new")) %></button>

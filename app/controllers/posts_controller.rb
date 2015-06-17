@@ -31,7 +31,6 @@ class PostsController < ApplicationController
 			if @post.save
 				@posts = Post.all
 				format.js
-				# refresh_dom_with_partial 'div#postsContainer', 'posts'
 			else
 				format.html { render :new }
 				format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -44,8 +43,9 @@ class PostsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @post.update(post_params)
-				format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-				format.json { render :show, status: :ok, location: @post }
+				# format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+				@posts = Post.all
+				format.js
 			else
 				format.html { render :edit }
 				format.json { render json: @post.errors, status: :unprocessable_entity }
