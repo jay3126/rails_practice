@@ -26,6 +26,7 @@ function createOrUpdatePost(){
 		});
 	}else{
 		var url = "/posts/"+"#{post_id}";
+		alert(url);
 		$.ajax({
 			type: "PATCH",
 			url: url,
