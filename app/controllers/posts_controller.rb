@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 	before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+	
 	# GET /posts
 	# GET /posts.json
 	def index
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
 
 		respond_to do |format|
 			if @post.save
-				@posts = Post.all
+				fetch_all_posts
 				format.js
 			else
 				format.html { render :new }
@@ -43,8 +43,8 @@ class PostsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @post.update(post_params)
+				fetch_all_posts
 				# format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-				@posts = Post.all
 				format.js
 			else
 				format.html { render :edit }
@@ -57,9 +57,11 @@ class PostsController < ApplicationController
 	# DELETE /posts/1.json
 	def destroy
 		@post.destroy
+		fetch_all_posts
 		respond_to do |format|
-			format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-			format.json { head :no_content }
+			format.js
+			# format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+			# format.json { head :no_content }
 		end
 	end
 
@@ -79,5 +81,9 @@ class PostsController < ApplicationController
 		# Never trust parameters from the scary internet, only allow the white list through.
 		def post_params
 			params.require(:post).permit(:title, :description)
+		end
+
+		def fetch_all_posts
+			@posts = Post.all
 		end
 end

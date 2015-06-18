@@ -56,3 +56,25 @@ function fetchPost(action, post_id){
 	});
 	$("#postModal").modal({keyboard: false});
 }
+
+function openConfirmationModal(post_id){
+	$('#post_id').val(post_id);
+	$('#confirmationModal').modal({keyboard: false});
+}
+
+function delPost(){
+	$('#confirmationModal').modal('hide');
+	$('#spinner_div').show();
+	var post_id = $('#post_id').val();
+	url = "/posts/"+post_id;
+	$.ajax({
+		type: "DELETE",
+		url: url,
+		dataType: "script",
+		data: {id: post_id},
+		beforeSend: function(){},
+		success: function() {},
+		complete: function() { $('#spinner_div').hide(); },
+		error: function() {}
+	});
+}
