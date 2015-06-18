@@ -14,3 +14,32 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+function validateFields(fields){
+	var errors = 0;
+	$.each(fields, function(i,arr){
+		if($(arr[0]).val() == ''){
+			errors += 1;
+			addRedBorder(arr[0], null);
+		}else{
+			removeRedBorder(arr[0]);
+		}
+	});
+	return errors;
+}
+
+function addError(obj,err){
+	obj.closest('.form-group').find("div[data-hold='error']").text(err);
+}
+
+function removeError(obj){
+	obj.closest('.form-group').find("div[data-hold='error']").text('');
+}
+
+function addRedBorder(obj){
+	$(obj).addClass('red-border');
+}
+
+function removeRedBorder(obj){
+	$(obj).removeClass('red-border');
+}

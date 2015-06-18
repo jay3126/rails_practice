@@ -8,6 +8,21 @@ function openForm(action, post_id){
 	$("#postModal").modal({keyboard: false});
 }
 
+function validatePostForm(){
+	var title = $('#post_title');
+	var title_val = title.val();
+	var desc = $('#post_description');
+	var desc_val = desc.val();
+	var fields = [];
+	fields.push([title,"Can't be left blank"]);
+	fields.push([desc,"Can't be left blank"]);
+
+	var errors = validateFields(fields);
+	if(errors <= 0){
+		createOrUpdatePost();
+	}
+}
+
 function createOrUpdatePost(){
 	$("#postModal").modal('hide');
 	var action_type = $("#action_type").val();
