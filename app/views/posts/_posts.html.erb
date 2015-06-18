@@ -17,7 +17,7 @@
 				<td><%= post.description %></td>
 				<td><%=l post.created_at %></td>
 				<td>
-					<button type="button" class="btn btn-default btn-xs" id="editPostBtn" onClick="openForm('edit', '<%= post.id %>');"><%= t('.edit', :default => t("helpers.links.edit")) %></button>
+					<button type="button" class="btn btn-default btn-xs" id="editPostBtn" onClick="fetchPost('edit', '<%= post.id %>');"><%= t('.edit', :default => t("helpers.links.edit")) %></button>
 					<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
 											post_path(post),
 											:method => :delete,

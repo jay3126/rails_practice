@@ -25,8 +25,7 @@ function createOrUpdatePost(){
 			error: function() {}
 		});
 	}else{
-		var url = "/posts/"+"#{post_id}";
-		alert(url);
+		var url = "/posts/"+post_id;
 		$.ajax({
 			type: "PATCH",
 			url: url,
@@ -38,4 +37,22 @@ function createOrUpdatePost(){
 			error: function() {}
 		});
 	}
+}
+
+function fetchPost(action, post_id){
+	$('#spinner_div').show();
+	$('#action_type').val(action);
+	$('#post_id').val(post_id);
+	url = "/posts/"+post_id+"/fetch_posts";
+	$.ajax({
+		type: "GET",
+		url: url,
+		dataType: "script",
+		data: {id: post_id},
+		beforeSend: function(){},
+		success: function() {},
+		complete: function() { $('#spinner_div').hide(); },
+		error: function() {}
+	});
+	$("#postModal").modal({keyboard: false});
 }
